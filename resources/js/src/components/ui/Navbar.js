@@ -6,7 +6,7 @@ import { authLogout } from '../actions/auth';
 export const Navbar = () => {
     const dispatch = useDispatch();
     
-    const { role } = useSelector(state => state.auth)
+    const { role, name } = useSelector(state => state.auth)
 
     const handleLogout = () => {
         dispatch(authLogout());
@@ -29,10 +29,10 @@ export const Navbar = () => {
                         <Link className="nav-item nav-link" to='/clients'>Clientes</Link>
                         <li className="nav-item dropdown">
                             <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Usuario
+                                { name }
                             </a>
                             <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a className="dropdown-item">Actualizar perfil</a>
+                                {/* <a className="dropdown-item">Actualizar perfil</a> */}
                                 <a className="dropdown-item" onClick={ handleLogout }>Cerrar sesión</a>
                             </div>
                         </li>

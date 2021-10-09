@@ -3,9 +3,11 @@ import axios from 'axios'
 import { Navbar } from '../../ui/Navbar';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { useSelector } from 'react-redux';
 
 export const UserScreen = () => {
     const [users, setUsers] = useState([]);
+    const { id } = useSelector(state => state.auth)
     
     const token = localStorage.getItem('token') || '';
 
@@ -20,24 +22,28 @@ export const UserScreen = () => {
     }, [])
 
     const handleDelete = (user_id) => {
-        Swal.fire({
-            title: '¿Esta seguro de eliminar este registro?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Si',
-            cancelButtonText: 'No'
-            }).then(async(result) => {
-                if (result.isConfirmed) {
-                    await axios.delete(`/api/users/${ user_id }?token=${ token }`).then(res => {
-                        if (res.data.success) {
-                            getUsers();
-                            Swal.fire('', res.data.message, 'success');
-                        }
-                    });
-                }   
-        })
+        if (id === user_id) {
+            Swal.fire('Error', 'No puedes eliminar el usuario con el que estas autenticado', 'error');
+        } else {
+            Swal.fire({
+                title: '¿Esta seguro de eliminar este registro?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si',
+                cancelButtonText: 'No'
+                }).then(async(result) => {
+                    if (result.isConfirmed) {
+                        await axios.delete(`/api/users/${ user_id }?token=${ token }`).then(res => {
+                            if (res.data.success) {
+                                getUsers();
+                                Swal.fire('', res.data.message, 'success');
+                            }
+                        });
+                    }   
+            })
+        }
     }
     
     return (
