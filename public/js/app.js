@@ -4537,12 +4537,12 @@ var AppRouter = function AppRouter() {
         path: "/users",
         component: _components_isAuth_users_UserScreen__WEBPACK_IMPORTED_MODULE_7__.UserScreen,
         isAuthUser: !!id
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_PrivateRoute__WEBPACK_IMPORTED_MODULE_2__.PrivateRoute, {
+      }), role === 'Administrador' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_PrivateRoute__WEBPACK_IMPORTED_MODULE_2__.PrivateRoute, {
         exact: true,
         path: "/users/create",
         component: _components_isAuth_users_UserCreateScreen__WEBPACK_IMPORTED_MODULE_8__.UserCreateScreen,
         isAuthUser: !!id
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_PrivateRoute__WEBPACK_IMPORTED_MODULE_2__.PrivateRoute, {
+      }), role === 'Administrador' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_PrivateRoute__WEBPACK_IMPORTED_MODULE_2__.PrivateRoute, {
         exact: true,
         path: "/users/edit/:id",
         component: _components_isAuth_users_UserEditScreen__WEBPACK_IMPORTED_MODULE_9__.UserEditScreen,

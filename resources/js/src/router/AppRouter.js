@@ -40,9 +40,14 @@ export const AppRouter = () => {
                     (role === 'Administrador') 
                         && <PrivateRoute exact path="/users" component={ UserScreen } isAuthUser={ !!id } />
                 }
-
-                <PrivateRoute exact path="/users/create" component={ UserCreateScreen } isAuthUser={ !!id } />
-                <PrivateRoute exact path="/users/edit/:id" component={ UserEditScreen } isAuthUser={ !!id } />
+                {
+                    (role === 'Administrador') 
+                        && <PrivateRoute exact path="/users/create" component={ UserCreateScreen } isAuthUser={ !!id } />
+                }
+                {
+                    (role === 'Administrador') 
+                        && <PrivateRoute exact path="/users/edit/:id" component={ UserEditScreen } isAuthUser={ !!id } />
+                }
 
                 <PrivateRoute exact path="/home" component={ HomeScreen } isAuthUser={ !!id } />
 
