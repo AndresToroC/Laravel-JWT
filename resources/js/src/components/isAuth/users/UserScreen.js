@@ -36,12 +36,6 @@ export const UserScreen = () => {
                             Swal.fire('', res.data.message, 'success');
                         }
                     });
-
-                    Swal.fire(
-                        'Deleted!',
-                        'Your file has been deleted.',
-                        'success'
-                    )
                 }   
         })
     }

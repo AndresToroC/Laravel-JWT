@@ -5,7 +5,7 @@ import { Navbar } from '../../ui/Navbar'
 import Swal from 'sweetalert2'
 import { Link } from 'react-router-dom'
 
-export const EditScreen = () => {
+export const UserEditScreen = () => {
     const { id } = useParams();
     const token = localStorage.getItem('token');
     

@@ -42,7 +42,6 @@ export const authIsAuthenticated = () => {
         
         try {
             await axios.post('/api/auth/refreshToken?token='+token).then(res => {
-                console.log(res);
                 if (res.data.success) {
                     localStorage.setItem('token', res.data.token);
                     

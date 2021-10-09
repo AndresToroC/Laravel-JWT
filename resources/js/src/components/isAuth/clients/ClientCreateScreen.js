@@ -1,55 +1,48 @@
-import axios from 'axios';
 import React, { useState } from 'react'
+import axios from 'axios';
 import { Link } from 'react-router-dom';
-import Swal from 'sweetalert2';
 import { Navbar } from '../../ui/Navbar'
+import Swal from 'sweetalert2';
 
-export const CreateScreen = () => {
+export const ClientCreateScreen = () => {
     const token = localStorage.getItem('token');
     
     const [name, setName] = useState('');
+    const [document, setDocument] = useState('');
     const [email, setEmail] = useState('');
-    const [role, setRole] = useState('');
-    const [password, setPassword] = useState('');
-    const [password_confirmation, setPasswordConfirmation] = useState('');
+    const [address, setAdress] = useState('');
     const [errors, setErrors] = useState([]);
 
     const handleNameChange = ({ target }) => {
         setName(target.value)
     }
 
+    const handleDocumentChange = ({ target }) => {
+        setDocument(target.value)
+    }
+
     const handleEmailChange = ({ target }) => {
         setEmail(target.value)
     }
 
-    const handleRoleChange = ({ target }) => {
-        setRole(target.value)
-    }
 
-    const handlePasswordChange = ({ target }) => {
-        setPassword(target.value)
-    }
-
-    const handlePasswordConfirmationChange = ({ target }) => {
-        setPasswordConfirmation(target.value)
+    const handleAdressChange = ({ target }) => {
+        setAdress(target.value)
     }
 
     const handleCreate = async(e) => {
         e.preventDefault();
         
         const data = {
-            name, email, role, password, password_confirmation
-        }
-
-        if (password !== password_confirmation) {
-            Swal.fire('Error', 'Las contraseñas deben de ser iguales', 'error');
+            name, document, email, address
         }
 
         try {
-            await axios.post(`/api/users?token=${ token }`, data).then(res => {
+            await axios.post(`/api/clients?token=${ token }`, data).then(res => {
                 if (res.data.success) {
                     setErrors([]);
-
+                    clearForm();
+                    
                     Swal.fire('', res.data.message, 'success');
                 } else {
                     setErrors(Object.values(res.data.errors));
@@ -58,6 +51,13 @@ export const CreateScreen = () => {
         } catch (error) {
             console.log(error);
         }
+    }
+
+    const clearForm = () => {
+        setName('');
+        setDocument('');
+        setEmail('');
+        setAdress('');
     }
 
     return (
@@ -82,7 +82,7 @@ export const CreateScreen = () => {
                         
                         <div className="card">
                             <div className="card-header">
-                                <b>Crear usuario</b>
+                                <b>Crear Cliente</b>
                             </div>
                             <div className="card-body">
                                 <form onSubmit={ handleCreate }>
@@ -92,33 +92,23 @@ export const CreateScreen = () => {
                                             value={ name } onChange={ handleNameChange } />
                                     </div>
                                     <div className="form-group">
+                                        <label htmlFor="document">Document</label>
+                                        <input type="text" name="document" id="document" className="form-control" 
+                                            value={ document } onChange={ handleDocumentChange } />
+                                    </div>
+                                    <div className="form-group">
                                         <label htmlFor="email">Correo</label>
                                         <input type="email" name="email" id="email" className="form-control" 
                                             value={ email } onChange={ handleEmailChange } />
                                     </div>
                                     <div className="form-group">
-                                        <label htmlFor="role">Rol</label>
-                                        <select name="role" id="role" className="form-control" value={ role } onChange={ handleRoleChange } >
-                                            <option value="" disabled>Seleccione un Rol</option>
-                                            <option value="Administrador" >Administrador</option>
-                                            <option value="Vendedor" >Vendedor</option>
-                                        </select>
-                                        <p>{ role }</p>
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="password">Contraseña</label>
-                                        <input type="password" name="password" id="password" className="form-control"
-                                            value={ password } onChange={ handlePasswordChange } />
-                                        <small className="text-gray">Dejar en blanco si no se va a actualizar</small>
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="password_confirmation">Confirmar Contraseña</label>
-                                        <input type="password" name="password_confirmation" id="password_confirmation" className="form-control"
-                                            value={ password_confirmation } onChange={ handlePasswordConfirmationChange } />
+                                        <label htmlFor="address">Dirección</label>
+                                        <input type="text" name="address" id="address" className="form-control" 
+                                            value={ address } onChange={ handleAdressChange } />
                                     </div>
                                     <div className="mt-4">
                                         <button type="submit" className="btn btn-success btn-block">Guardar</button>
-                                        <Link to="/users" className="btn btn-dark btn-block">Regresar</Link>
+                                        <Link to="/clients" className="btn btn-dark btn-block">Regresar</Link>
                                     </div>
                                 </form>
                             </div>

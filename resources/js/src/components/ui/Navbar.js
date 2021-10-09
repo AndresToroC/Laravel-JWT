@@ -1,11 +1,12 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useRouteMatch } from 'react-router-dom'
 import { authLogout } from '../actions/auth';
 
 export const Navbar = () => {
     const dispatch = useDispatch();
-
+    const { path } = useRouteMatch();
+    
     const { role } = useSelector(state => state.auth)
 
     const handleLogout = () => {
@@ -23,7 +24,7 @@ export const Navbar = () => {
                     <div className="navbar-nav">
                         {
                             (role === 'Administrador')
-                                ? <Link className="nav-item nav-link active" to='/users'>Usuarios</Link>
+                                ? <Link className="nav-item nav-link" to='/users'>Usuarios</Link>
                                 : ''
                         }
                         <Link className="nav-item nav-link" to='/clients'>Clientes</Link>
