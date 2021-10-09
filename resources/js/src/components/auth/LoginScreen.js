@@ -32,6 +32,7 @@ export const LoginScreen = () => {
         <div className="container mt-5">
             <div className="row">
                 <div className="col-md-6 offset-3">
+                    <b>Laravel con JWT y React</b>
                     <div className="card">
                         <div className="card-header text-center">
                             <b>Iniciar sesión</b>

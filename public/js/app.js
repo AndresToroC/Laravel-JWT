@@ -2243,9 +2243,11 @@ var LoginScreen = function LoginScreen() {
     className: "container mt-5",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
       className: "row",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         className: "col-md-6 offset-3",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("b", {
+          children: "Laravel con JWT y React"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           className: "card",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             className: "card-header text-center",
@@ -2305,7 +2307,7 @@ var LoginScreen = function LoginScreen() {
               })]
             })]
           })]
-        })
+        })]
       })
     })
   });
@@ -2534,6 +2536,8 @@ var AppRouter = function AppRouter() {
         exact: true,
         path: "/login",
         component: _components_auth_LoginScreen__WEBPACK_IMPORTED_MODULE_1__.LoginScreen
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Redirect, {
+        to: "/login"
       })]
     })
   });
