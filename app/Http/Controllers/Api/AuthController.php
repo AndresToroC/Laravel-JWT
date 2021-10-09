@@ -40,14 +40,14 @@ class AuthController extends Controller
         return response()->json([
             'success' => false,
             'message' => 'Las credenciales no son validas'
-        ], 401);
+        ]);
     }
 
     public function logout() {
         auth()->logout();
 
         return response()->json([
-            'message' => 'Cierre de sessión'
+            'message' => 'Cierre de sesión'
         ]);
     }
 
