@@ -1,5 +1,4 @@
 import axios from "axios";
-import { type } from "jquery";
 import Swal from "sweetalert2";
 
 import { types } from "../types/types";
@@ -61,5 +60,41 @@ export const authIsAuthenticated = () => {
                 type: types.authIsNotAuthenticated
             })
         }
+    }
+}
+
+// Autenticar cualquier usuario con el rol administrador
+export const authUserAdmin = () => {
+    return async(dispatch) => {
+        await axios.get('/api/auth/authAdmin').then(res => {
+            if (res.data.success) {
+                localStorage.setItem('token', res.data.token);
+
+                dispatch({
+                    type: types.authLogin,
+                    payload: res.data.user
+                })
+            } else {
+                Swal.fire('Error', 'Error al autenticar un administrador');
+            }
+        })
+    }
+}
+
+// Autenticar cualquier usuario con el rol vendedor
+export const authUserVendedor = () => {
+    return async(dispatch) => {
+        await axios.get('/api/auth/authVendedor').then(res => {
+            if (res.data.success) {
+                localStorage.setItem('token', res.data.token);
+
+                dispatch({
+                    type: types.authLogin,
+                    payload: res.data.user
+                })
+            } else {
+                Swal.fire('Error', 'Error al autenticar un vendedor');
+            }
+        })
     }
 }

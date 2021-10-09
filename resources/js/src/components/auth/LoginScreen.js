@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 
 import { useForm } from '../hooks/useForm'
 import { useDispatch } from 'react-redux';
-import { authLogin } from '../actions/auth';
+import { authLogin, authUserAdmin, authUserVendedor } from '../actions/auth';
 
 export const LoginScreen = () => {
     const dispatch = useDispatch();
@@ -24,6 +24,14 @@ export const LoginScreen = () => {
         }
         
         dispatch(authLogin(email, password));
+    }
+
+    const handleAuthAdmin = () => {
+        dispatch(authUserAdmin());
+    }
+
+    const handleAuthVendedor = () => {
+        dispatch(authUserVendedor());
     }
 
     return (
@@ -54,8 +62,8 @@ export const LoginScreen = () => {
                             <hr />
                             <p>Ingresar con cualquier usuario que tenga uno de los siguientes roles</p>
                             <div className="d-flex justify-content-between">
-                                <a href="" className="btn btn-success">Administrador</a>
-                                <a href="" className="btn btn-warning">Vendedor</a>
+                                <a onClick={ handleAuthAdmin } className="btn btn-success">Administrador</a>
+                                <a onClick={ handleAuthVendedor } className="btn btn-warning">Vendedor</a>
                             </div>
                         </div>
                     </div>

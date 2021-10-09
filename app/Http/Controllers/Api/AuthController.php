@@ -6,13 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
+use App\Models\User;
 use Auth;
 
 class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
+        $this->middleware('auth:api', ['except' => ['login', 'authAdmin', 'authVendedor']]);
     }
 
     public function login(Request $request) {
@@ -58,5 +59,33 @@ class AuthController extends Controller
             'user' => auth()->user(),
             'token' => auth()->refresh()
         ], 200);
+    }
+
+    public function authAdmin() {
+        $user = User::whereRole('Administrador')->first();
+        
+        $token = auth()->login($user);
+        
+        if ($token) {
+            return response()->json([
+                'success' => true,
+                'user' => auth()->user()->toArray(),
+                'token' => $token
+            ], 200);
+        }
+    }
+
+    public function authVendedor() {
+        $user = User::whereRole('Vendedor')->first();
+        
+        $token = auth()->login($user);
+        
+        if ($token) {
+            return response()->json([
+                'success' => true,
+                'user' => auth()->user()->toArray(),
+                'token' => $token
+            ], 200);
+        }
     }
 }

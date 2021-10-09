@@ -12,6 +12,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::middleware('api')->prefix('auth')->group(function() {
     Route::post('login', [AuthController::class, 'login']);
+    Route::get('authAdmin', [AuthController::class, 'authAdmin']);
+    Route::get('authVendedor', [AuthController::class, 'authVendedor']);
+
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('refreshToken', [AuthController::class, 'refreshToken']);
 });

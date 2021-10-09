@@ -2205,23 +2205,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "authLogin": () => (/* binding */ authLogin),
 /* harmony export */   "authLogout": () => (/* binding */ authLogout),
-/* harmony export */   "authIsAuthenticated": () => (/* binding */ authIsAuthenticated)
+/* harmony export */   "authIsAuthenticated": () => (/* binding */ authIsAuthenticated),
+/* harmony export */   "authUserAdmin": () => (/* binding */ authUserAdmin),
+/* harmony export */   "authUserVendedor": () => (/* binding */ authUserVendedor)
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _types_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../types/types */ "./resources/js/src/components/types/types.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _types_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../types/types */ "./resources/js/src/components/types/types.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 
 
 
@@ -2241,11 +2240,11 @@ var authLogin = function authLogin(email, password) {
                 if (res.data.success) {
                   localStorage.setItem('token', res.data.token);
                   dispatch({
-                    type: _types_types__WEBPACK_IMPORTED_MODULE_4__.types.authLogin,
+                    type: _types_types__WEBPACK_IMPORTED_MODULE_3__.types.authLogin,
                     payload: res.data.user
                   });
                 } else {
-                  sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire('Error', res.data.message, 'error');
+                  sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire('Error', res.data.message, 'error');
                 }
               });
 
@@ -2276,7 +2275,7 @@ var authLogout = function authLogout() {
                 if (res.data.success) {
                   localStorage.clear();
                   dispatch({
-                    type: _types_types__WEBPACK_IMPORTED_MODULE_4__.types.authLogout
+                    type: _types_types__WEBPACK_IMPORTED_MODULE_3__.types.authLogout
                   });
                 }
               });
@@ -2314,12 +2313,12 @@ var authIsAuthenticated = function authIsAuthenticated() {
                 if (res.data.success) {
                   localStorage.setItem('token', res.data.token);
                   dispatch({
-                    type: _types_types__WEBPACK_IMPORTED_MODULE_4__.types.authLogin,
+                    type: _types_types__WEBPACK_IMPORTED_MODULE_3__.types.authLogin,
                     payload: res.data.user
                   });
                 } else {
                   dispatch({
-                    type: _types_types__WEBPACK_IMPORTED_MODULE_4__.types.authIsNotAuthenticated
+                    type: _types_types__WEBPACK_IMPORTED_MODULE_3__.types.authIsNotAuthenticated
                   });
                 }
               });
@@ -2330,7 +2329,7 @@ var authIsAuthenticated = function authIsAuthenticated() {
 
             case 6:
               dispatch({
-                type: _types_types__WEBPACK_IMPORTED_MODULE_4__.types.authIsNotAuthenticated
+                type: _types_types__WEBPACK_IMPORTED_MODULE_3__.types.authIsNotAuthenticated
               });
 
             case 7:
@@ -2343,6 +2342,74 @@ var authIsAuthenticated = function authIsAuthenticated() {
 
     return function (_x3) {
       return _ref3.apply(this, arguments);
+    };
+  }();
+}; // Autenticar cualquier usuario con el rol administrador
+
+var authUserAdmin = function authUserAdmin() {
+  return /*#__PURE__*/function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4(dispatch) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              _context4.next = 2;
+              return axios__WEBPACK_IMPORTED_MODULE_1___default().get('/api/auth/authAdmin').then(function (res) {
+                if (res.data.success) {
+                  localStorage.setItem('token', res.data.token);
+                  dispatch({
+                    type: _types_types__WEBPACK_IMPORTED_MODULE_3__.types.authLogin,
+                    payload: res.data.user
+                  });
+                } else {
+                  sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire('Error', 'Error al autenticar un administrador');
+                }
+              });
+
+            case 2:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4);
+    }));
+
+    return function (_x4) {
+      return _ref4.apply(this, arguments);
+    };
+  }();
+}; // Autenticar cualquier usuario con el rol vendedor
+
+var authUserVendedor = function authUserVendedor() {
+  return /*#__PURE__*/function () {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5(dispatch) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+        while (1) {
+          switch (_context5.prev = _context5.next) {
+            case 0:
+              _context5.next = 2;
+              return axios__WEBPACK_IMPORTED_MODULE_1___default().get('/api/auth/authVendedor').then(function (res) {
+                if (res.data.success) {
+                  localStorage.setItem('token', res.data.token);
+                  dispatch({
+                    type: _types_types__WEBPACK_IMPORTED_MODULE_3__.types.authLogin,
+                    payload: res.data.user
+                  });
+                } else {
+                  sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire('Error', 'Error al autenticar un vendedor');
+                }
+              });
+
+            case 2:
+            case "end":
+              return _context5.stop();
+          }
+        }
+      }, _callee5);
+    }));
+
+    return function (_x5) {
+      return _ref5.apply(this, arguments);
     };
   }();
 };
@@ -2413,6 +2480,14 @@ var LoginScreen = function LoginScreen() {
     dispatch((0,_actions_auth__WEBPACK_IMPORTED_MODULE_5__.authLogin)(email, password));
   };
 
+  var handleAuthAdmin = function handleAuthAdmin() {
+    dispatch((0,_actions_auth__WEBPACK_IMPORTED_MODULE_5__.authUserAdmin)());
+  };
+
+  var handleAuthVendedor = function handleAuthVendedor() {
+    dispatch((0,_actions_auth__WEBPACK_IMPORTED_MODULE_5__.authUserVendedor)());
+  };
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
     className: "container mt-5",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
@@ -2471,11 +2546,11 @@ var LoginScreen = function LoginScreen() {
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
               className: "d-flex justify-content-between",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("a", {
-                href: "",
+                onClick: handleAuthAdmin,
                 className: "btn btn-success",
                 children: "Administrador"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("a", {
-                href: "",
+                onClick: handleAuthVendedor,
                 className: "btn btn-warning",
                 children: "Vendedor"
               })]
