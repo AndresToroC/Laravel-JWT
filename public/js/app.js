@@ -4054,6 +4054,11 @@ var UserScreen = function UserScreen() {
       users = _useState2[0],
       setUsers = _useState2[1];
 
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(''),
+      _useState4 = _slicedToArray(_useState3, 2),
+      search = _useState4[0],
+      setSearch = _useState4[1];
+
   var _useSelector = (0,react_redux__WEBPACK_IMPORTED_MODULE_5__.useSelector)(function (state) {
     return state.auth;
   }),
@@ -4068,7 +4073,7 @@ var UserScreen = function UserScreen() {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_2___default().get("/api/users?token=".concat(token)).then(function (res) {
+              return axios__WEBPACK_IMPORTED_MODULE_2___default().get("/api/users?token=".concat(token, "&search=").concat(search)).then(function (res) {
                 setUsers(res.data.users);
               });
 
@@ -4135,6 +4140,21 @@ var UserScreen = function UserScreen() {
     }
   };
 
+  var handleSearchChange = function handleSearchChange(_ref3) {
+    var target = _ref3.target;
+    setSearch(target.value);
+  };
+
+  var handleUsersSearch = function handleUsersSearch(e) {
+    e.preventDefault();
+    getUsers();
+  };
+
+  var clearSearch = function clearSearch() {
+    setSearch('');
+    getUsers();
+  };
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_ui_Navbar__WEBPACK_IMPORTED_MODULE_3__.Navbar, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
       className: "container mt-5",
@@ -4156,9 +4176,38 @@ var UserScreen = function UserScreen() {
                   children: "Nuevo"
                 })]
               })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
               className: "card-body",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("form", {
+                  onSubmit: handleUsersSearch,
+                  className: "mb-3",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+                    className: "row",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+                      className: "col-md-8",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
+                        type: "search",
+                        value: search,
+                        onChange: handleSearchChange,
+                        className: "form-control",
+                        placeholder: "Buscar por nombre de usuario"
+                      })
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+                      className: "col-md-4",
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
+                        type: "submit",
+                        className: "btn btn-primary mr-3",
+                        children: "Buscar"
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
+                        onClick: clearSearch,
+                        className: "btn btn-dark",
+                        children: "Limpiar"
+                      })]
+                    })]
+                  })
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
                 className: "table-responsive",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("table", {
                   className: "table table-hover",
@@ -4199,7 +4248,7 @@ var UserScreen = function UserScreen() {
                     })
                   })]
                 })
-              })
+              })]
             })]
           })
         })

@@ -11,9 +11,13 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
+        $search = isset($request->search) ? $request->search : '';
+
+        $users = User::when($search, function($q) use ($search) {
+            return $q->where('name', 'LIKE', '%'.$search.'%');
+        })->get();
 
         return response()->json([
             'users' => $users,

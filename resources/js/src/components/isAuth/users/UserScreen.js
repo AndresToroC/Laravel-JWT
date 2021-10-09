@@ -7,12 +7,13 @@ import { useSelector } from 'react-redux';
 
 export const UserScreen = () => {
     const [users, setUsers] = useState([]);
+    const [search, setSearch] = useState('');
     const { id } = useSelector(state => state.auth)
     
     const token = localStorage.getItem('token') || '';
 
     const getUsers = async() => {
-        await axios.get(`/api/users?token=${ token }`).then(res => {
+        await axios.get(`/api/users?token=${ token }&search=${ search }`).then(res => {
             setUsers(res.data.users);
         })
     }
@@ -45,7 +46,23 @@ export const UserScreen = () => {
             })
         }
     }
+
+    const handleSearchChange = ({ target }) => {
+        setSearch(target.value)
+    }
+
+    const handleUsersSearch = (e) => {
+        e.preventDefault();
+        
+        getUsers();
+    }
     
+    const clearSearch = () => {
+        setSearch('');
+
+        getUsers();
+    }
+
     return (
         <div>
             <Navbar />
@@ -60,6 +77,20 @@ export const UserScreen = () => {
                                 </div>
                             </div>
                             <div className="card-body">
+                                <div>
+                                    <form onSubmit={ handleUsersSearch } className="mb-3">
+                                        <div className="row">
+                                            <div className="col-md-8">
+                                                <input type="search" value={ search } onChange={ handleSearchChange } className="form-control"
+                                                    placeholder="Buscar por nombre de usuario"/>
+                                            </div>
+                                            <div className="col-md-4">
+                                                <button type="submit" className="btn btn-primary mr-3">Buscar</button>
+                                                <button onClick={ clearSearch } className="btn btn-dark">Limpiar</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                                 <div className="table-responsive">
                                     <table className="table table-hover">
                                         <thead>
