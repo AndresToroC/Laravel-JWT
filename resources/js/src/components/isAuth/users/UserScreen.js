@@ -3,7 +3,6 @@ import axios from 'axios'
 import { Navbar } from '../../ui/Navbar';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { useDispatch } from 'react-redux';
 
 export const UserScreen = () => {
     const [users, setUsers] = useState([]);

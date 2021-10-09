@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\http\Controllers\Api\AuthController;
 use App\http\Controllers\Api\UserController;
+use App\http\Controllers\Api\ClientController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -21,4 +22,5 @@ Route::middleware('api')->prefix('auth')->group(function() {
 
 Route::middleware('auth')->group(function() {
     Route::resource('users', UserController::class)->except(['create', 'show']);
+    Route::resource('clients', ClientController::class)->except(['create', 'show']);
 });
