@@ -93,7 +93,7 @@ export const ClientCreateScreen = () => {
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="document">Document</label>
-                                        <input type="text" name="document" id="document" className="form-control" 
+                                        <input type="number" name="document" id="document" className="form-control" 
                                             value={ document } onChange={ handleDocumentChange } />
                                     </div>
                                     <div className="form-group">

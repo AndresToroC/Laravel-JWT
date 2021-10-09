@@ -2867,7 +2867,7 @@ var ClientCreateScreen = function ClientCreateScreen() {
                     htmlFor: "document",
                     children: "Document"
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
-                    type: "text",
+                    type: "number",
                     name: "document",
                     id: "document",
                     className: "form-control",
@@ -3136,7 +3136,7 @@ var ClientEditScreen = function ClientEditScreen() {
                     htmlFor: "document",
                     children: "Document"
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
-                    type: "text",
+                    type: "number",
                     name: "document",
                     id: "document",
                     className: "form-control",
