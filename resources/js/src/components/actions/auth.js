@@ -40,8 +40,9 @@ export const authIsAuthenticated = () => {
     return async(dispatch) => {
         const token = localStorage.getItem('token') || '';
         
-        if (token) {
+        try {
             await axios.post('/api/auth/refreshToken?token='+token).then(res => {
+                console.log(res);
                 if (res.data.success) {
                     localStorage.setItem('token', res.data.token);
                     
@@ -55,7 +56,7 @@ export const authIsAuthenticated = () => {
                     })
                 }
             });
-        } else {
+        } catch (error) {
             dispatch({
                 type: types.authIsNotAuthenticated
             })

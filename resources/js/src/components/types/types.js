@@ -3,5 +3,4 @@ export const types = {
     authLogout: '[auth] logout',
     authIsAuthenticated: '[auth] authenticated',
     authIsNotAuthenticated: '[auth] not authenticated'
-
 }
