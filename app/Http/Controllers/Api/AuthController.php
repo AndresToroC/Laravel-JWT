@@ -47,12 +47,15 @@ class AuthController extends Controller
         auth()->logout();
 
         return response()->json([
+            'success' => true,
             'message' => 'Cierre de sesión'
         ]);
     }
 
     public function refreshToken() {
         return response()->json([
+            'success' => true,
+            'user' => auth()->user(),
             'token' => auth()->refresh()
         ], 200);
     }

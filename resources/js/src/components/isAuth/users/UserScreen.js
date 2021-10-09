@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Navbar } from '../../../ui/Navbar';
+import { Navbar } from '../../ui/Navbar';
 
 export const UserScreen = () => {
     const [users, setUsers] = useState([]);
 
+    const token = localStorage.getItem('token') || '';
+
     useEffect(() => {
-        axios.get('/api/users').then(res => {
+        axios.get('/api/users?token='+token).then(res => {
             setUsers(res.data.users);
         })
     }, [setUsers])

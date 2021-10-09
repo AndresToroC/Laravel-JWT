@@ -3,8 +3,12 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 
 import { useForm } from '../hooks/useForm'
+import { useDispatch } from 'react-redux';
+import { authLogin } from '../actions/auth';
 
 export const LoginScreen = () => {
+    const dispatch = useDispatch();
+
     const [formValues, handleInputChange] = useForm({
         'email': '',
         'password': ''
@@ -14,18 +18,12 @@ export const LoginScreen = () => {
 
     const handleSubmitLogin = (e) => {
         e.preventDefault();
-        
-        const data = {
-            email, password
-        }
 
-        axios.post('/api/auth/login', data).then(res => {
-            if (res.data.success) {
-                localStorage.setItem('token', res.data.token);
-            } else {
-                Swal.fire('Error', res.data.message, 'error');
-            }
-        })
+        if (email.trim() === '' || password.trim() === '') {
+            Swal.fire('Error', 'El email y la contraseña son obligatorios', 'error')            
+        }
+        
+        dispatch(authLogin(email, password));
     }
 
     return (

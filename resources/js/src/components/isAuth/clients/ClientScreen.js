@@ -1,5 +1,5 @@
 import React from 'react'
-import { Navbar } from '../../../ui/Navbar'
+import { Navbar } from '../../ui/Navbar'
 
 export const ClientScreen = () => {
     return (
