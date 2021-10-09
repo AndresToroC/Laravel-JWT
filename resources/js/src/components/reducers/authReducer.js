@@ -19,6 +19,8 @@ export const authReducer = (state = initialState, action) => {
             }
 
         case types.authIsNotAuthenticated:
+            localStorage.clear();
+
             return {
                 ...state,
                 checking: false

@@ -40,22 +40,28 @@ export const authIsAuthenticated = () => {
     return async(dispatch) => {
         const token = localStorage.getItem('token') || '';
         
-        try {
-            await axios.post('/api/auth/refreshToken?token='+token).then(res => {
-                if (res.data.success) {
-                    localStorage.setItem('token', res.data.token);
-                    
-                    dispatch({
-                        type: types.authLogin,
-                        payload: res.data.user
-                    })
-                } else {
-                    dispatch({
-                        type: types.authIsNotAuthenticated
-                    })
-                }
-            });
-        } catch (error) {
+        if (token) {
+            try {
+                await axios.post('/api/auth/refreshToken?token='+token).then(res => {
+                    if (res.data.success) {
+                        localStorage.setItem('token', res.data.token);
+                        
+                        dispatch({
+                            type: types.authLogin,
+                            payload: res.data.user
+                        })
+                    } else {
+                        dispatch({
+                            type: types.authIsNotAuthenticated
+                        })
+                    }
+                });
+            } catch (error) {
+                dispatch({
+                    type: types.authIsNotAuthenticated
+                })
+            }
+        } else {
             dispatch({
                 type: types.authIsNotAuthenticated
             })

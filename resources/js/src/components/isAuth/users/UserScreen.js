@@ -10,7 +10,7 @@ export const UserScreen = () => {
     const token = localStorage.getItem('token') || '';
 
     const getUsers = async() => {
-        await axios.get('/api/users?token='+token).then(res => {
+        await axios.get(`/api/users?token=${ token }`).then(res => {
             setUsers(res.data.users);
         })
     }
@@ -54,33 +54,35 @@ export const UserScreen = () => {
                                 </div>
                             </div>
                             <div className="card-body">
-                                <table className="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Nombre</th>
-                                            <th>Correo</th>
-                                            <th>Rol</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {
-                                            users.map(user => {
-                                                return (
-                                                    <tr key={ user.id }>
-                                                        <td>{ user.name }</td>
-                                                        <td>{ user.email }</td>
-                                                        <td>{ user.role }</td>
-                                                        <td className="text-right">
-                                                            <Link to={`/users/edit/${user.id}`} className="btn btn-primary btn-sm mr-3">Editar</Link>
-                                                            <button onClick={ () => handleDelete(user.id) } className="btn btn-danger btn-sm">Eliminar</button>
-                                                        </td>
-                                                    </tr>
-                                                );
-                                            })
-                                        }
-                                    </tbody>
-                                </table>
+                                <div className="table-responsive">
+                                    <table className="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Nombre</th>
+                                                <th>Correo</th>
+                                                <th>Rol</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {
+                                                users.map(user => {
+                                                    return (
+                                                        <tr key={ user.id }>
+                                                            <td>{ user.name }</td>
+                                                            <td>{ user.email }</td>
+                                                            <td>{ user.role }</td>
+                                                            <td className="text-right">
+                                                                <Link to={`/users/edit/${user.id}`} className="btn btn-primary btn-sm mr-3">Editar</Link>
+                                                                <button onClick={ () => handleDelete(user.id) } className="btn btn-danger btn-sm">Eliminar</button>
+                                                            </td>
+                                                        </tr>
+                                                    );
+                                                })
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>

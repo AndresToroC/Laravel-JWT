@@ -54,35 +54,37 @@ export const ClientScreen = () => {
                                 </div>
                             </div>
                             <div className="card-body">
-                                <table className="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Nombre</th>
-                                            <th>Documento</th>
-                                            <th>Correo</th>
-                                            <th>Dirección</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {
-                                            clients.map(client => {
-                                                return (
-                                                    <tr key={ client.id }>
-                                                        <td>{ client.name }</td>
-                                                        <td>{ client.document }</td>
-                                                        <td>{ client.email }</td>
-                                                        <td>{ client.address }</td>
-                                                        <td className="text-right">
-                                                            <Link to={`/clients/edit/${client.id}`} className="btn btn-primary btn-sm mr-3">Editar</Link>
-                                                            <button onClick={ () => handleDelete(client.id) } className="btn btn-danger btn-sm">Eliminar</button>
-                                                        </td>
-                                                    </tr>
-                                                );
-                                            })
-                                        }
-                                    </tbody>
-                                </table>
+                                <div className="table-responsive">
+                                    <table className="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Nombre</th>
+                                                <th>Documento</th>
+                                                <th>Correo</th>
+                                                <th>Dirección</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {
+                                                clients.map(client => {
+                                                    return (
+                                                        <tr key={ client.id }>
+                                                            <td>{ client.name }</td>
+                                                            <td>{ client.document }</td>
+                                                            <td>{ client.email }</td>
+                                                            <td>{ client.address }</td>
+                                                            <td className="text-right">
+                                                                <Link to={`/clients/edit/${client.id}`} className="btn btn-primary btn-sm mr-3">Editar</Link>
+                                                                <button onClick={ () => handleDelete(client.id) } className="btn btn-danger btn-sm">Eliminar</button>
+                                                            </td>
+                                                        </tr>
+                                                    );
+                                                })
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>

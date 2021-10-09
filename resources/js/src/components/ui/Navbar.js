@@ -1,11 +1,10 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useRouteMatch } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { authLogout } from '../actions/auth';
 
 export const Navbar = () => {
     const dispatch = useDispatch();
-    const { path } = useRouteMatch();
     
     const { role } = useSelector(state => state.auth)
 
