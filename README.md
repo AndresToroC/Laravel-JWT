@@ -20,20 +20,20 @@ La base de datos que se usa es sqlite.
 
 ## Pasos para la instalación del proyecto
 1. Clonar el proyecto del repositorio
-git clone https://github.com/AndresToroC/Laravel-JWT.git
+- git clone https://github.com/AndresToroC/Laravel-JWT.git
 2. Ingresar a la carpeta Laravel-JWT
-cd Laravel-JWT
+- cd Laravel-JWT
 3. Instalar composer
-composer install
+- composer install
 4. Copiar el archivo .env.example a .env
-window: copy .env.example .env
-Linux: cp .env.example .env
+- window: copy .env.example .env
+- Linux: cp .env.example .env
 * Si esta en ubuntu debe de instalar: sudo apt-get install php-sqlite3
 5. Generar clave
-php artisan key:generate
+- php artisan key:generate
 6. Generar clave del JWT auth
-php artisan jwt:secret
+- php artisan jwt:secret
 7. Ejecutar migraciones y seeders
-php artisan migrate --seed
+- php artisan migrate --seed
 8. Ejecutar el programa con:
-php artisan serve
+- php artisan serve
